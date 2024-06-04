@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import logo from "../../../../public/color_logo-wm-lm_dimensions.png"
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-    // const { user, logOut } = useContext(AuthContext);
-    // const [isAdmin] = useAdmin();
-    // const [cart] = useCart();
+    const { user, logOut } = useAuth();
 
-    // const handleLogout = () => {
-    //     logOut()
-    //         .then(() => { })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
-    // }
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
@@ -55,7 +54,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex">
                         <img src={logo} className="w-16 h-10" alt="" />
-                    <a className="btn btn-ghost text-xl">StudyBuddyHub</a>
+                        <a className="btn btn-ghost text-xl">StudyBuddyHub</a>
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -64,8 +63,36 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <Link to="/login"><button className="btn btn-primary">Login</button></Link>
-                    <button className="btn btn-secondary">Sign Up</button>
+                    {/* profile */}
+                    {
+                        user?.email ? <div className="dropdown dropdown-end dropdown-hover">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-16 rounded-full">
+
+                                    <img src={
+                                        user.photoURL ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7rlHILcxkNp4iwSUhRCeGjQAnZcisSGs9txj5d4FvFr782-NoItG0iDd0GD0eK4WITxU&usqp=CAU'
+                                    } />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto">
+                                <li>
+                                    <button className="btn btn-sm">
+                                        {user?.displayName || user?.email}
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={handleLogout} className="btn btn-sm">
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                            :
+                            <>
+                                <Link to="/login"><button className="btn btn-primary">Login</button></Link>
+                                <Link to="/register"><button className="btn btn-secondary">Sign Up</button></Link>
+                            </>
+                    }
                 </div>
             </div>
         </>
