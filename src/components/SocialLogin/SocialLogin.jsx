@@ -26,7 +26,6 @@ const SocialLogin = () => {
 
     return (
         <div className="p-8">
-
             <div className="mt-2">
                 <p className=" text-xl font-bold text-center">--------------- OR ---------------</p>
                 <div className="mt-4 text-center">
