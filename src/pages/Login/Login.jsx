@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import pic from '../../assets/login/login.svg'
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -14,7 +15,7 @@ const Login = () => {
     console.log('state in the location login page', location.state)
 
     useEffect(() => {
-        // loadCaptchaEnginge(6);
+        loadCaptchaEnginge(6);
     }, [])
 
     const handleLogin = e => {
@@ -51,13 +52,13 @@ const Login = () => {
     }
 
     const handleValidateCaptcha = (e) => {
-        // const user_captcha_value = e.target.value;
-        // if (validateCaptcha(user_captcha_value)) {
-        //     setDisabled(false)
-        // }
-        // else {
-        //     setDisabled(true)
-        // }
+        const user_captcha_value = e.target.value;
+        if (validateCaptcha(user_captcha_value)) {
+            setDisabled(false)
+        }
+        else {
+            setDisabled(true)
+        }
     }
 
     return (
@@ -65,6 +66,9 @@ const Login = () => {
             <Helmet>
                 <title>StudyBuddyHub | Login </title>
             </Helmet>
+            <div className='bg-base-200 mt-2 p-2'>
+                <h1 className="text-5xl font-bold text-center">Login now!</h1>
+            </div>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="w-1/2 mr-12">
@@ -89,7 +93,7 @@ const Login = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    {/* <LoadCanvasTemplate /> */}
+                                    <LoadCanvasTemplate />
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the text above" className="input input-bordered" />
                             </div>

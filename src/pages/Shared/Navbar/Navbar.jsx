@@ -64,7 +64,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <button className="btn btn-primary">Login</button>
+                    <Link to="/login"><button className="btn btn-primary">Login</button></Link>
                     <button className="btn btn-secondary">Sign Up</button>
                 </div>
             </div>
