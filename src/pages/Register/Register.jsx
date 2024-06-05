@@ -15,11 +15,11 @@ const Register = () => {
 
     const onSubmit = data => {
         console.log(data);
-        createUser(data.email, data.password)
+        createUser(data?.email, data?.password)
             .then((result) => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                updateUserProfile(data.name, data.photoUrl)
+                updateUserProfile(data?.name, data?.photoUrl)
                     .then(() => {
                         const userInfo = {
                             name: data?.name,

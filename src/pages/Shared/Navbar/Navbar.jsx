@@ -15,7 +15,6 @@ const Navbar = () => {
 
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/">Our Menu</Link></li>
         {/* {
             user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>
         }
@@ -65,28 +64,30 @@ const Navbar = () => {
                 <div className="navbar-end gap-2">
                     {/* profile */}
                     {
-                        user?.email ? <div className="dropdown dropdown-end dropdown-hover">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-16 rounded-full">
-
-                                    <img src={
-                                        user.photoURL ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7rlHILcxkNp4iwSUhRCeGjQAnZcisSGs9txj5d4FvFr782-NoItG0iDd0GD0eK4WITxU&usqp=CAU'
-                                    } />
+                        user?.email ? <>
+                            <p><Link to="/dashboard">Dashboard</Link></p>
+                            <div className="dropdown dropdown-end dropdown-hover">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-16 rounded-full">
+                                        <img src={
+                                            user?.photoURL ? user?.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7rlHILcxkNp4iwSUhRCeGjQAnZcisSGs9txj5d4FvFr782-NoItG0iDd0GD0eK4WITxU&usqp=CAU'
+                                        } />
+                                    </div>
                                 </div>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto">
+                                    <li>
+                                        <button className="btn btn-sm">
+                                            {user?.displayName || user?.email}
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLogout} className="btn btn-sm">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto">
-                                <li>
-                                    <button className="btn btn-sm">
-                                        {user?.displayName || user?.email}
-                                    </button>
-                                </li>
-                                <li>
-                                    <button onClick={handleLogout} className="btn btn-sm">
-                                        Logout
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
+                        </>
                             :
                             <>
                                 <Link to="/login"><button className="btn btn-primary">Login</button></Link>
