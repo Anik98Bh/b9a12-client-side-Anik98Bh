@@ -6,7 +6,7 @@ const Dashboard = () => {
             <div className="w-64 min-h-screen ">
                 <ul className="menu">
                     <li><NavLink to="/dashboard/viewBooked">View booked</NavLink></li>
-                    <li><NavLink to="/dashboard/note">Create Note </NavLink></li>
+                    <li><NavLink to="/dashboard/createNote">Create Note</NavLink></li>
                     <li><NavLink to="/dashboard/personalNotes">Manage Personal Notes</NavLink></li>
                     <li><NavLink to="/dashboard/viewAll">View All</NavLink></li>
 

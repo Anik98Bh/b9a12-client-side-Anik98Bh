@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import Details from "../components/Details/Details";
 import ViewBooked from "../pages/Dashboard/ViewBooked/ViewBooked";
+import CreateNote from "../pages/Dashboard/CreateNote/CreateNote";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             {
                 path: "viewBooked",
                 element: <ViewBooked />,
+            },
+            {
+                path: "createNote",
+                element: <CreateNote />,
             },
         ],
     }

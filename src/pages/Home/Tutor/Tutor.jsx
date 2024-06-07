@@ -30,12 +30,12 @@ const Tutor = () => {
                             <div>
                                 <div className="card w-96 shadow-xl">
                                     <figure className="px-10 pt-10">
-                                        <img src={item.image} alt="" className="rounded-full" />
+                                        <img src={item?.image} alt="" className="rounded-full" />
                                     </figure>
                                     <div className="card-body items-center text-center">
                                         <h2 className="text-2xl font-bold">{item.tutorName}</h2>
-                                        <p>{item.tutorEmail}</p>
-                                        <p>{item.subjectsTaught[0]}, {item.subjectsTaught[1]}, {item.subjectsTaught[2]}</p>
+                                        <p>{item?.tutorEmail}</p>
+                                        <p>{item?.subjectsTaught[0]}, {item?.subjectsTaught[1]}, {item?.subjectsTaught[2]}</p>
                                     </div>
                                 </div>
                             </div>
