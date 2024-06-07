@@ -7,6 +7,8 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
+import Details from "../components/Details/Details";
+import ViewBooked from "../pages/Dashboard/ViewBooked/ViewBooked";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +18,11 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/study/:id",
+                element: <PrivateRoute><Details /></PrivateRoute>,
+                loader: ({params})=>fetch(`http://localhost:5000/study/${params?.id}`)
             },
             {
                 path: "/login",
@@ -28,8 +35,13 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        children: [],
+        children: [
+            {
+                path: "viewBooked",
+                element: <ViewBooked />,
+            },
+        ],
     }
 ]);

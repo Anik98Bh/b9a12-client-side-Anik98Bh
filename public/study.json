@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        
         "sessionTitle": "Introduction to Web Development",
         "tutorName": "Jane Doe",
         "tutorEmail": "jane.doe@example.com",
@@ -14,7 +14,7 @@
         "status": "Open"
     },
     {
-        "id": 2,
+        
         "sessionTitle": "Advanced Python Programming",
         "tutorName": "John Smith",
         "tutorEmail": "john.smith@example.com",
@@ -28,7 +28,7 @@
         "status": "Open"
     },
     {
-        "id": 3,
+        
         "sessionTitle": "Data Science with R",
         "tutorName": "Alice Johnson",
         "tutorEmail": "alice.johnson@example.com",
@@ -42,7 +42,7 @@
         "status": "Open"
     },
     {
-        "id": 4,
+        
         "sessionTitle": "Introduction to Web Development",
         "tutorName": "Jane Doe",
         "tutorEmail": "jane.doe@example.com",
@@ -56,7 +56,7 @@
         "status": "Open"
     },
     {
-        "id": 5,
+        
         "sessionTitle": "Introduction to Web Development",
         "tutorName": "Jane Doe",
         "tutorEmail": "jane.doe@example.com",
@@ -70,7 +70,7 @@
         "status": "Open"
     },
     {
-        "id": 6,
+        
         "sessionTitle": "Introduction to Web Development",
         "tutorName": "Jane Doe",
         "tutorEmail": "jane.doe@example.com",

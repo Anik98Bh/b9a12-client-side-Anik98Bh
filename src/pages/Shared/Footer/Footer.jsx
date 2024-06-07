@@ -1,7 +1,7 @@
 import logo from "../../../../public/color_logo-wm-lm_dimensions.png"
 const Footer = () => {
     return (
-        <footer>
+        <footer className="mt-5">
             <div className="footer p-10 bg-neutral text-neutral-content">
                 <aside>
                     <img src={logo} className="w-20 h-16" alt="" />
