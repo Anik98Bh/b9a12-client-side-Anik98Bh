@@ -11,6 +11,7 @@ import Details from "../components/Details/Details";
 import ViewBooked from "../pages/Dashboard/ViewBooked/ViewBooked";
 import CreateNote from "../pages/Dashboard/CreateNote/CreateNote";
 import PersonalNotes from "../pages/Dashboard/PersonalNotes/PersonalNotes";
+import ViewAll from "../pages/Dashboard/ViewAll/ViewAll";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path: "personalNotes",
                 element: <PersonalNotes />,
+            },
+            {
+                path: "viewAll",
+                element: <ViewAll />,
             },
         ],
     }
