@@ -4,6 +4,7 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <div className="w-64 min-h-screen ">
+                <h2 className="text-xl font-bold text-center mt-2">Student Route</h2>
                 <ul className="menu">
                     <li><NavLink to="/dashboard/viewBooked">View booked</NavLink></li>
                     <li><NavLink to="/dashboard/createNote">Create Note</NavLink></li>
