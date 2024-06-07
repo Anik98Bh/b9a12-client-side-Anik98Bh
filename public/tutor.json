@@ -1,0 +1,52 @@
+[
+    {
+        
+        "tutorName": "Jane Doe",
+        "image":"https://pub-static.fotor.com/assets/projects/pages/9d04ebe4b7344d028746b864fc23e8cc/300w/fotor-2c923e712fa8495e9e046d5f10c04433.jpg",
+        "tutorEmail": "jane.doe@example.com",
+        "subjectsTaught": ["Web Development", "HTML", "CSS", "JavaScript"],
+        "bio": "Jane is a web developer with over 5 years of experience in creating responsive and user-friendly web applications. She has a passion for teaching and has helped many students start their journey in web development.",
+        "experience": "5 years",
+        "rating": 4.8
+    },
+    {
+        
+        "tutorName": "John Smith",
+        "image":"https://pub-static.fotor.com/assets/projects/pages/9d04ebe4b7344d028746b864fc23e8cc/300w/fotor-2c923e712fa8495e9e046d5f10c04433.jpg",
+        "tutorEmail": "john.smith@example.com",
+        "subjectsTaught": ["Python", "Data Science", "Machine Learning"],
+        "bio": "John is a data scientist with a deep understanding of machine learning and data analysis. He has worked on numerous projects and enjoys sharing his knowledge with aspiring data scientists.",
+        "experience": "7 years",
+        "rating": 4.9
+    },
+    {
+        
+        "tutorName": "Alice Johnson",
+        "image":"https://pub-static.fotor.com/assets/projects/pages/9d04ebe4b7344d028746b864fc23e8cc/300w/fotor-2c923e712fa8495e9e046d5f10c04433.jpg",
+        "tutorEmail": "alice.johnson@example.com",
+        "subjectsTaught": ["Data Science", "R Programming", "Statistics"],
+        "bio": "Alice is a statistician and data analyst with extensive experience in using R for data science projects. She is dedicated to helping students understand complex statistical concepts and apply them in real-world scenarios.",
+        "experience": "6 years",
+        "rating": 4.7
+    },
+    {
+        
+        "tutorName": "Michael Brown",
+        "image":"https://pub-static.fotor.com/assets/projects/pages/9d04ebe4b7344d028746b864fc23e8cc/300w/fotor-2c923e712fa8495e9e046d5f10c04433.jpg",
+        "tutorEmail": "michael.brown@example.com",
+        "subjectsTaught": ["Machine Learning", "Artificial Intelligence", "TensorFlow"],
+        "bio": "Michael is a machine learning expert with a focus on AI and deep learning. He has a wealth of experience in developing and deploying AI models and enjoys mentoring students in this cutting-edge field.",
+        "experience": "8 years",
+        "rating": 4.9
+    },
+    {
+        
+        "tutorName": "Emily Davis",
+        "image":"https://pub-static.fotor.com/assets/projects/pages/9d04ebe4b7344d028746b864fc23e8cc/300w/fotor-2c923e712fa8495e9e046d5f10c04433.jpg",
+        "tutorEmail": "emily.davis@example.com",
+        "subjectsTaught": ["Cybersecurity", "Network Security", "Ethical Hacking"],
+        "bio": "Emily is a cybersecurity specialist with a strong background in network security and ethical hacking. She has helped numerous organizations secure their systems and enjoys teaching students the importance of cybersecurity.",
+        "experience": "5 years",
+        "rating": 4.8
+    }
+]
