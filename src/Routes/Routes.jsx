@@ -12,6 +12,7 @@ import ViewBooked from "../pages/Dashboard/ViewBooked/ViewBooked";
 import CreateNote from "../pages/Dashboard/CreateNote/CreateNote";
 import PersonalNotes from "../pages/Dashboard/PersonalNotes/PersonalNotes";
 import ViewAll from "../pages/Dashboard/ViewAll/ViewAll";
+import CreateStudy from "../pages/Dashboard/CreateStudy/CreateStudy";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,12 @@ export const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+            // tutor
+            {
+                path: "createStudy",
+                element: <CreateStudy />,
+            },
+            //student
             {
                 path: "viewBooked",
                 element: <ViewBooked />,

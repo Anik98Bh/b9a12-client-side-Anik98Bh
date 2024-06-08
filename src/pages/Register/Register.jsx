@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 
 
 const Register = () => {
-    const { createUser, updateUserProfile } = useAuth()
+    const { createUser, updateUserProfile } = useAuth();
     const { register, handleSubmit,reset, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -71,13 +71,13 @@ const Register = () => {
                                 <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" />
                                 {errors.name && <span className="text-red-600">Name is required</span>}
                             </div>
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Photo URL</span>
                                 </label>
-                                <input type="text" {...register("photoUrl", { required: true })} placeholder="Photo URL" className="input input-bordered" />
+                                <input type="file" {...register("photoUrl", { required: true })} placeholder="Photo URL" className="input input-bordered" />
                                 {errors.photoUrl && <span className="text-red-600">Photo URL is required</span>}
-                            </div>
+                            </div> */}
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Role</span>
