@@ -5,8 +5,6 @@ const CreateStudy = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
 
-    // const { , _id, tutorName, tutorEmail,, , , , ,, ,  } = study;
-
     const onSubmit = data => {
         console.log(data);
         // createUser(data?.email, data?.password)

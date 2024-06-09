@@ -13,6 +13,7 @@ import CreateNote from "../pages/Dashboard/CreateNote/CreateNote";
 import PersonalNotes from "../pages/Dashboard/PersonalNotes/PersonalNotes";
 import ViewAll from "../pages/Dashboard/ViewAll/ViewAll";
 import CreateStudy from "../pages/Dashboard/CreateStudy/CreateStudy";
+import ViewAllStudy from "../pages/Dashboard/ViewAllStudy/ViewAllStudy";
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
             {
                 path: "createStudy",
                 element: <CreateStudy />,
+            },
+            {
+                path: "viewAllStudy",
+                element: <ViewAllStudy />,
             },
             //student
             {

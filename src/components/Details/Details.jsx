@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Details = () => {
     const study = useLoaderData();
-    const { sessionTitle, _id, tutorName, tutorEmail, sessionDescription, registrationStartDate, registrationEndDate, classStartDate, classEndDate, sessionDuration, registrationFee, status } = study;
+    const { sessionTitle, tutorName, tutorEmail, sessionDescription, registrationStartDate, registrationEndDate, classStartDate, classEndDate, sessionDuration, registrationFee, status } = study;
 
     return (
         <div>

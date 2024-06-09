@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-    const isTutor = true;
+    const isTutor = false;
     return (
         <div className="flex">
             <div className="w-64 min-h-screen ">
@@ -10,9 +10,9 @@ const Dashboard = () => {
                     {
                         isTutor ? <>
                             <li><NavLink to="/dashboard/createStudy">Create Study Session</NavLink></li>
-                            <li><NavLink to="/dashboard/createNote">View all study sessions</NavLink></li>
-                            <li><NavLink to="/dashboard/personalNotes">Upload materials</NavLink></li>
-                            <li><NavLink to="/dashboard/viewAll">View all materials</NavLink></li>
+                            <li><NavLink to="/dashboard/viewAllStudy">View all study sessions</NavLink></li>
+                            <li><NavLink to="/dashboard/uploadMaterials">Upload materials</NavLink></li>
+                            <li><NavLink to="/dashboard/viewAllMaterials">View all materials</NavLink></li>
                         </> : <>
                             <li><NavLink to="/dashboard/viewBooked">View booked</NavLink></li>
                             <li><NavLink to="/dashboard/createNote">Create Note</NavLink></li>

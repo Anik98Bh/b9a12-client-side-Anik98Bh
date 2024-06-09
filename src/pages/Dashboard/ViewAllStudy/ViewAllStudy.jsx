@@ -1,7 +1,5 @@
-import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin6Fill } from "react-icons/ri";
 
-const PersonalNotes = () => {
+const ViewAllStudy = () => {
     return (
         <div>
             <div className="overflow-x-auto">
@@ -11,10 +9,8 @@ const PersonalNotes = () => {
                         <tr>
                             <th></th>
                             <th>Session Title</th>
-                            <th>Student Details</th>
+                            <th>Tutor Details</th>
                             <th>Status</th>
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,27 +19,21 @@ const PersonalNotes = () => {
                             <th>1</th>
                             <td>Cy Ganderton</td>
                             <td>Quality Control Specialist</td>
-                            <td>Booked</td>
-                            <td><button className="btn"><FaEdit className="text-2xl"></FaEdit></button></td>
-                            <td><button className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button></td>
+                            <td>Blue</td>
                         </tr>
                         {/* row 2 */}
                         <tr>
                             <th>2</th>
                             <td>Hart Hagerty</td>
                             <td>Desktop Support Technician</td>
-                            <td>Booked</td>
-                            <td><button className="btn"><FaEdit className="text-2xl"></FaEdit></button></td>
-                            <td><button className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button></td>
+                            <td>Purple</td>
                         </tr>
                         {/* row 3 */}
                         <tr>
                             <th>3</th>
                             <td>Brice Swyre</td>
                             <td>Tax Accountant</td>
-                            <td>Booked</td>
-                            <td><button className="btn"><FaEdit className="text-2xl"></FaEdit></button></td>
-                            <td><button className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button></td>
+                            <td>Red</td>
                         </tr>
                     </tbody>
                 </table>
@@ -52,4 +42,4 @@ const PersonalNotes = () => {
     );
 };
 
-export default PersonalNotes;
+export default ViewAllStudy;
