@@ -1,5 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
+import useAuth from "../../../hooks/useAuth";
 
 const ViewAllStudy = () => {
+    const axiosCommon = useAxiosCommon();
+    const { user } = useAuth();
+
+    const { data: session = [] } = useQuery({
+        queryKey: ['session', user?.email],
+        queryFn: async () => {
+            const res = await axiosCommon.get(`/all-session?email=${user?.email}`)
+            return res.data;
+        }
+    })
+    console.log(session)
+
+    const handleNewApproval=()=>{
+
+    }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -15,30 +34,22 @@ const ViewAllStudy = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>
-                                <p className="bg-[#b7caef] text-center rounded-full py-1 font-bold">Pending</p>
-                            </td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
+                        {
+                            session?.map((item, idx) => <tr key={item._id}>
+                                <th>{idx + 1}</th>
+                                <td>{item.title}</td>
+                                <td>
+                                    <p>{item.name}</p>
+                                    <p>{item.email}</p>
+                                </td>
+                                <td>
+                                    <p className="bg-[#b7caef] text-center rounded-full py-1 font-bold">{item.status}</p>
+                                </td>
+                                {item?.status === "rejected" &&
+                                    <td><button onClick={handleNewApproval(item._id)}> New Approval</button></td>}
+                            </tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </div>

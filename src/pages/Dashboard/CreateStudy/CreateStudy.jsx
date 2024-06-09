@@ -1,44 +1,25 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
 
 const CreateStudy = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
+    const axiosCommon=useAxiosCommon();
 
-    const onSubmit = data => {
+    const onSubmit = async(data) => {
         console.log(data);
-        // createUser(data?.email, data?.password)
-        //     .then((result) => {
-        //         const loggedUser = result.user;
-        //         console.log(loggedUser);
-        //         updateUserProfile(data?.name, data?.photoUrl)
-        //             .then(() => {
-        //                 const userInfo = {
-        //                     name: data?.name,
-        //                     email: data?.email
-        // }
-        // create user entry in the database
-        // axiosPublic.post('/users', userInfo)
-        //     .then(res => {
-        //         if (res.data.insertedId) {
-        //             console.log('user added to the database')
-        //             reset()
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "user created successfully",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //             navigate('/')
-        //         }
-        //     })
-
-        //         })
-        //         .catch((error) => {
-        //             console.log(error)
-        //         });
-        // })
+        try {
+            const response = await axiosCommon.post('/create-session', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response.data);
+            reset();
+        } catch (error) {
+            console.error("There was an error creating the note!", error);
+        }
     };
 
     return (
@@ -63,13 +44,13 @@ const CreateStudy = () => {
                         <label className="label">
                             <span className="label-text">Registration Start Date</span>
                         </label>
-                        <input type="date" {...register("date", { required: true })} name="date" placeholder="" className="input input-bordered" />
+                        <input type="date" {...register("registration_start_date", { required: true })} name="registration_start_date" placeholder="" className="input input-bordered" />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Registration End Date </span>
                         </label>
-                        <input type="date" {...register("date", { required: true })} name="date" placeholder="" className="input input-bordered" />
+                        <input type="date" {...register("registration_end_date", { required: true })} name="registration_end_date" placeholder="" className="input input-bordered" />
                     </div>
                 </div>
                 <div className="flex gap-5">
@@ -77,13 +58,13 @@ const CreateStudy = () => {
                         <label className="label">
                             <span className="label-text">Class Start Date</span>
                         </label>
-                        <input type="date" {...register("date", { required: true })} name="date" placeholder="" className="input input-bordered" />
+                        <input type="date" {...register("class_start_date", { required: true })} name="class_start_date" placeholder="" className="input input-bordered" />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Class End Date </span>
                         </label>
-                        <input type="date" {...register("date", { required: true })} name="date" placeholder="" className="input input-bordered" />
+                        <input type="date" {...register("class_end_date", { required: true })} name="class_end_date" placeholder="" className="input input-bordered" />
                     </div>
                 </div>
                 <div className="flex gap-5">
@@ -121,7 +102,7 @@ const CreateStudy = () => {
                     </div>
                 </div>
                 <div className="form-control mt-6">
-                    <input className="btn btn-primary" type="submit" value="Register" />
+                    <input className="btn btn-primary" type="submit" value="Create Study" />
                 </div>
             </form>
         </div>
