@@ -18,6 +18,7 @@ import ViewAllMaterials from "../pages/Dashboard/ViewAllMaterials/ViewAllMateria
 import UploadMaterials from "../pages/Dashboard/UploadMaterials/UploadMaterials";
 import ViewAllUsers from "../pages/Dashboard/Admin/ViewAllUsers/ViewAllUsers";
 import ViewAllStudySession from "../pages/Dashboard/Admin/ViewAllStudySession/ViewAllStudySession";
+import AllMaterials from "../pages/Dashboard/Admin/AllMaterials/AllMaterials";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
             {
                 path: "viewAllStudySession",
                 element: <ViewAllStudySession />,
+            },
+            {
+                path: "allMaterials",
+                element: <AllMaterials />,
             },
             // tutor
             {
