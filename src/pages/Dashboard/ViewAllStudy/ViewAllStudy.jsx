@@ -11,6 +11,7 @@ const ViewAllStudy = () => {
                             <th>Session Title</th>
                             <th>Tutor Details</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -20,6 +21,9 @@ const ViewAllStudy = () => {
                             <td>Cy Ganderton</td>
                             <td>Quality Control Specialist</td>
                             <td>Blue</td>
+                            <td>
+                                <p className="bg-[#b7caef] text-center rounded-full py-1 font-bold">Pending</p>
+                            </td>
                         </tr>
                         {/* row 2 */}
                         <tr>

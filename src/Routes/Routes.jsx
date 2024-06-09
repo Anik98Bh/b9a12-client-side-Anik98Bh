@@ -14,6 +14,7 @@ import PersonalNotes from "../pages/Dashboard/PersonalNotes/PersonalNotes";
 import ViewAll from "../pages/Dashboard/ViewAll/ViewAll";
 import CreateStudy from "../pages/Dashboard/CreateStudy/CreateStudy";
 import ViewAllStudy from "../pages/Dashboard/ViewAllStudy/ViewAllStudy";
+import ViewAllMaterials from "../pages/Dashboard/ViewAllMaterials/ViewAllMaterials";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path: "viewAllStudy",
                 element: <ViewAllStudy />,
+            },
+            {
+                path: "viewAllMaterials",
+                element: <ViewAllMaterials />,
             },
             //student
             {
