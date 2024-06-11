@@ -15,28 +15,6 @@ const Navbar = () => {
 
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
-        {/* {
-            user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>
-        }
-        {
-            user && !isAdmin && <li><Link to="/dashboard/userHome">Dashboard</Link></li>
-        } */}
-        {/* <li>
-            <Link to="/dashboard/cart">
-                <button className="btn btn-sm">
-                    <FaShoppingCart className="mr-2" />
-                    <div className="badge badge-secondary">+{cart.length}</div>
-                </button>
-            </Link>
-        </li> */}
-        {
-            // user ? <>
-            //     {/* <span>{user?.displayName}</span> */}
-            //     <button onClick={handleLogout} className="btn btn-sm btn-ghost">Log Out</button>
-            // </> : <>
-            //     <li><Link to="/login">Login</Link></li>
-            // </>
-        }
     </>
 
     return (
@@ -74,7 +52,7 @@ const Navbar = () => {
                                         } />
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto">
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40">
                                     <li>
                                         <button className="btn btn-sm">
                                             {user?.displayName || user?.email}

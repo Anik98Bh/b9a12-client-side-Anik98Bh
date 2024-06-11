@@ -1,8 +1,28 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Details = () => {
     const study = useLoaderData();
     const { sessionTitle, tutorName, tutorEmail, sessionDescription, registrationStartDate, registrationEndDate, classStartDate, classEndDate, sessionDuration, registrationFee, status } = study;
+    const axiosCommon = useAxiosCommon();
+    const { register, handleSubmit, } = useForm();
+
+    const onSubmit = async (data) => {
+        console.log(data)
+        // try {
+        //     const response = await axiosCommon.post('', data, {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     });
+        //     console.log(response.data);
+        //     reset();
+        // } catch (error) {
+        //     console.error("There was an error creating the note!", error);
+        // }
+    };
+
 
     return (
         <div>
@@ -27,10 +47,46 @@ const Details = () => {
                         <p> Duration: {sessionDuration}</p>
                         <p>Status: {status}</p>
                     </div>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Book Now</button>
+                    <div className="card-actions justify-between">
+                        <button className="btn btn-primary btn-outline" onClick={() => document.getElementById('my_modal_5').showModal()}>Review
+                        </button>
+                        <Link to="/dashboard/payment">
+                            <button className="btn btn-primary">Book Now</button>
+                        </Link>
                     </div>
                 </div>
+            </div>
+            <div>
+                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <h3 className="font-bold text-lg">Submit your Review!</h3>
+                        <div>
+                            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Review</span>
+                                    </label>
+                                    <input type="text" {...register("review", { required: true })} placeholder="review" className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Rating: Out of 5</span>
+                                    </label>
+                                    <input type="number" {...register("rating", {
+                                        required: true
+                                    })} placeholder="rating" min={0} max={5} className="input input-bordered" />
+                                </div>
+                                <div className="form-control mt-6">
+                                    <input className="btn btn-primary" type="submit" value="Submit Review" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
             </div>
         </div>
     );

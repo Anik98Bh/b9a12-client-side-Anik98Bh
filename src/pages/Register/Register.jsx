@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth();
     const { register, handleSubmit,reset, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const axiosCommon = useAxiosCommon();
     const navigate = useNavigate();
 
     const onSubmit = data => {
@@ -22,25 +25,25 @@ const Register = () => {
                 updateUserProfile(data?.name, data?.photoUrl)
                     .then(() => {
                         const userInfo = {
-                            name: data?.name,
-                            email: data?.email
+                            ...loggedUser,
+                            role: data?.role
                         }
                         // create user entry in the database
-                        // axiosPublic.post('/users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             console.log('user added to the database')
-                        //             reset()
-                        //             Swal.fire({
-                        //                 position: "top-end",
-                        //                 icon: "success",
-                        //                 title: "user created successfully",
-                        //                 showConfirmButton: false,
-                        //                 timer: 1500
-                        //             });
-                        //             navigate('/')
-                        //         }
-                        //     })
+                        axiosCommon.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset()
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "user created successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/')
+                                }
+                            })
 
                     })
                     .catch((error) => {
@@ -85,7 +88,7 @@ const Register = () => {
                                 <select defaultValue="default" {...register("role", { required: true })}
                                     className="select select-bordered ">
                                     <option disabled value="default">Select a Role</option>
-                                    <option value="students">Students</option>
+                                    <option value="student">Student</option>
                                     <option value="tutor">Tutor</option>
                                     <option value="admin">Admin</option>
                                 </select>

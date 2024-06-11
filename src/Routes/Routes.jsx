@@ -19,6 +19,7 @@ import UploadMaterials from "../pages/Dashboard/UploadMaterials/UploadMaterials"
 import ViewAllUsers from "../pages/Dashboard/Admin/ViewAllUsers/ViewAllUsers";
 import ViewAllStudySession from "../pages/Dashboard/Admin/ViewAllStudySession/ViewAllStudySession";
 import AllMaterials from "../pages/Dashboard/Admin/AllMaterials/AllMaterials";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
             {
                 path: "viewBooked",
                 element: <ViewBooked />,
+            },
+            {
+                path: "payment",
+                element: <Payment />,
             },
             {
                 path: "createNote",

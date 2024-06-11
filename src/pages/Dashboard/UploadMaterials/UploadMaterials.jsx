@@ -4,6 +4,8 @@ import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+
 const UploadMaterials = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
@@ -25,6 +27,17 @@ const UploadMaterials = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
+        const image = data.image[0];
+        const binaryImg = new FormData();
+        binaryImg.append("image", image);
+        const res = await axiosCommon.post(
+            `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
+            binaryImg, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+        console.log(res.data)
         try {
             const response = await axiosCommon.post('/create-materials', data, {
                 headers: {
@@ -100,17 +113,17 @@ const UploadMaterials = () => {
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text">Status</span>
+                            <span className="label-text">Google Drive Link</span>
                         </label>
-                        <input type="text" {...register("status", { required: true })} name="status" placeholder="status" className="input input-bordered" value={'pending'} />
+                        <input type="text" {...register("url", { required: true })} name="url" placeholder="url" className="input input-bordered" />
                     </div>
                 </div>
                 <div className="flex gap-5">
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text">Name</span>
+                            <span className="label-text">Session Id</span>
                         </label>
-                        <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" defaultValue={id} readOnly />
+                        <input type="text" {...register("id", { required: true })} name="id" placeholder="id" className="input input-bordered" defaultValue={id} readOnly />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
@@ -120,7 +133,7 @@ const UploadMaterials = () => {
                     </div>
                 </div>
                 <div className="form-control mt-6">
-                    <input className="btn btn-primary" type="submit" value="Create Study" />
+                    <input className="btn btn-primary" type="submit" value="Upload Materials" />
                 </div>
             </form>
         </div>

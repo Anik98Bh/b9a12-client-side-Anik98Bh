@@ -1,8 +1,155 @@
+import { useForm } from "react-hook-form";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
+import useAxiosCommon from "../../../../hooks/useAxiosCommon";
+import useAuth from "../../../../hooks/useAuth";
 
 const ViewAllStudySession = () => {
+    const { user } = useAuth();
+    const { register, handleSubmit, reset } = useForm();
+    const axiosCommon = useAxiosCommon();
+
+    const onSubmit = async (data) => {
+        console.log(data);
+        try {
+            const response = await axiosCommon.post('/create-session', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response.data);
+            reset();
+        } catch (error) {
+            console.error("There was an error creating the note!", error);
+        }
+    };
     return (
         <div>
-            <h1>View All Study Session</h1>
+            <div className="overflow-x-auto">
+                <table className="table table-zebra">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Session Title</th>
+                            <th>Tutor Name</th>
+                            <th>Status</th>
+                            <th>Approved</th>
+                            <th>Rejected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* row 1 */}
+                        <tr>
+                            <th>1</th>
+                            <td>Cy Ganderton</td>
+                            <td>Quality Control Specialist</td>
+                            <td><p className="bg-[#a7d3f3] rounded-full text-center">Pending</p></td>
+                            <td>
+                                <button className="btn btn-circle" onClick={() => document.getElementById('my_modal_5').showModal()}>
+                                    <GiConfirmed className="text-3xl"></GiConfirmed>
+                                </button>
+                            </td>
+                            <td>
+                                <button className="btn btn-circle"><GiCancel className="text-3xl"></GiCancel></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 className="font-bold text-lg">Hello!</h3>
+                    <div>
+                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                            <div className="flex gap-5">
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Session Title</span>
+                                    </label>
+                                    <input type="text" {...register("title", { required: true })} name="title" placeholder="Session Title" className="input input-bordered" />
+                                </div>
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Session Description</span>
+                                    </label>
+                                    <textarea type="text" {...register("description", { required: true })} name="description" placeholder="Session description" className="textarea textarea-bordered" />
+                                </div>
+                            </div>
+                            <div className="flex gap-5">
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Registration Start Date</span>
+                                    </label>
+                                    <input type="date" {...register("registration_start_date", { required: true })} name="registration_start_date" placeholder="" className="input input-bordered" />
+                                </div>
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Registration End Date </span>
+                                    </label>
+                                    <input type="date" {...register("registration_end_date", { required: true })} name="registration_end_date" placeholder="" className="input input-bordered" />
+                                </div>
+                            </div>
+                            <div className="flex gap-5">
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Class Start Date</span>
+                                    </label>
+                                    <input type="date" {...register("class_start_date", { required: true })} name="class_start_date" placeholder="" className="input input-bordered" />
+                                </div>
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Class End Date </span>
+                                    </label>
+                                    <input type="date" {...register("class_end_date", { required: true })} name="class_end_date" placeholder="" className="input input-bordered" />
+                                </div>
+                            </div>
+                            <div className="form-control w-full">
+                                <label className="label">
+                                    <span className="label-text">Session Duration</span>
+                                </label>
+                                <input type="text" {...register("duration", { required: true })} name="duration" placeholder="session Duration" className="input input-bordered" />
+                            </div>
+                            <div className="flex gap-5">
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Registration Fee</span>
+                                    </label>
+                                    <input type="number" {...register("fee", { required: true })} name="fee" placeholder="registration Fee" className="input input-bordered" defaultValue={'0'} readOnly />
+                                </div>
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Status</span>
+                                    </label>
+                                    <input type="text" {...register("status", { required: true })} name="status" placeholder="status" className="input input-bordered" value={'pending'} />
+                                </div>
+                            </div>
+                            <div className="flex gap-5">
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Name</span>
+                                    </label>
+                                    <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" defaultValue={user?.displayName} />
+                                </div>
+                                <div className="form-control w-full">
+                                    <label className="label">
+                                        <span className="label-text">Email</span>
+                                    </label>
+                                    <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" defaultValue={user?.email} readOnly />
+                                </div>
+                            </div>
+                            <div className="form-control mt-6">
+                                <input className="btn btn-primary" type="submit" value="Create Study" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };
