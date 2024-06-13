@@ -21,6 +21,7 @@ import ViewAllStudySession from "../pages/Dashboard/Admin/ViewAllStudySession/Vi
 import AllMaterials from "../pages/Dashboard/Admin/AllMaterials/AllMaterials";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import SeeAllSessions from "../components/SeeAllSessions/SeeAllSessions";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
                 path: "/study/:id",
                 element: <PrivateRoute><Details /></PrivateRoute>,
                 loader: ({params})=>fetch(`http://localhost:5000/study/${params?.id}`)
+            },
+            {
+                path: "/seeAllSessions",
+                element: <SeeAllSessions />,
             },
             {
                 path: "/login",

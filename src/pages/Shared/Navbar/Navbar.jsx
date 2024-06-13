@@ -12,7 +12,7 @@ const Navbar = () => {
     });
 
     const handleToggle = () => {
-        const newTheme = theme === 'light' ? 'luxury' : 'light';
+        const newTheme = theme === 'light' ? 'black' : 'light';
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
     };
