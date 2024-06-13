@@ -1,8 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
+import useTutor from "../../../hooks/useTutor";
 
 const Dashboard = () => {
-    const isAdmin = true;
-    const isTutor = false;
+    const [isAdmin] = useAdmin();
+    // const [isTutor] = useTutor();
+    const isTutor = true;
     return (
         <div className="flex">
             <div className="w-64 min-h-screen ">

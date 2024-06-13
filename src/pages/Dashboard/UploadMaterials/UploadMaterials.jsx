@@ -3,6 +3,8 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
@@ -10,6 +12,7 @@ const UploadMaterials = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
     const [id, setId] = useState(null);
 
     const scrollContainerRef = useRef(null);
@@ -38,17 +41,26 @@ const UploadMaterials = () => {
             }
         });
         console.log(res.data)
-        try {
-            const response = await axiosCommon.post('/create-materials', data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(response.data);
-            reset();
-        } catch (error) {
-            console.error("There was an error creating the note!", error);
+        if (res?.data.success) {
+            const materialsData = {
+                ...data,
+                image: res?.data?.data?.display_url
+            }
+            const materialsRes = await axiosSecure.post('/create-materials', materialsData);
+            console.log(materialsRes.data);
+            if (materialsRes?.data?.insertedId) {
+                // show success popup
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: 'Materials added Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
         }
+
     };
 
     const handleAdd = (id) => {

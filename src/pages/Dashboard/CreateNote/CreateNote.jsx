@@ -1,22 +1,30 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const CreateNote = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
-        try {
-            const response = await axios.post('', data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(response.data);
+        console.log(data)
+        const noteItem={
+            ...data
+        }
+        const res = await axiosSecure.post('/create-note', noteItem);
+        console.log(res.data)
+        if (res.data.insertedId) {
+            // show success popup
             reset();
-        } catch (error) {
-            console.error("There was an error creating the note!", error);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: 'Note created Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     };
 

@@ -2,10 +2,11 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const SocialLogin = () => {
     const { googleSignIn, githubLogin } = useAuth();
-    // const axiosPublic = useAxiosPublic();
+    const axiosCommon = useAxiosCommon();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -14,18 +15,18 @@ const SocialLogin = () => {
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(result => {
+                const loggedUser = result.user;
                 console.log(result.user);
                 const userInfo = {
-                    email: result.user?.email,
-                    name: result.user?.displayName
+                    ...loggedUser
                 }
 
                 navigate(from, { replace: true });
-                // axiosPublic.post('/users', userInfo)
-                //     .then(res => {
-                //         console.log(res.data)
-                //         navigate('/')
-                //     })
+                axiosCommon.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data)
+                        navigate('/')
+                    })
             })
     }
 

@@ -20,11 +20,13 @@ import ViewAllUsers from "../pages/Dashboard/Admin/ViewAllUsers/ViewAllUsers";
 import ViewAllStudySession from "../pages/Dashboard/Admin/ViewAllStudySession/ViewAllStudySession";
 import AllMaterials from "../pages/Dashboard/Admin/AllMaterials/AllMaterials";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",

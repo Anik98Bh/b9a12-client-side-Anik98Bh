@@ -1,27 +1,37 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import Swal from "sweetalert2";
 
 const Details = () => {
     const study = useLoaderData();
-    const { sessionTitle, tutorName, tutorEmail, sessionDescription, registrationStartDate, registrationEndDate, classStartDate, classEndDate, sessionDuration, registrationFee, status } = study;
+    const { sessionTitle, tutorName, tutorEmail, sessionDescription, registrationStartDate, registrationEndDate, classStartDate, classEndDate, sessionDuration, registrationFee, status, _id } = study;
     const axiosCommon = useAxiosCommon();
-    const { register, handleSubmit, } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
         console.log(data)
-        // try {
-        //     const response = await axiosCommon.post('', data, {
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     });
-        //     console.log(response.data);
-        //     reset();
-        // } catch (error) {
-        //     console.error("There was an error creating the note!", error);
-        // }
-    };
+        const reviewData = {
+            ...data,
+            _id
+        }
+        const res = await axiosCommon.post('/create-review', reviewData)
+            .then(res => {
+                if (res.data?.insertedId) {
+                    console.log('Review added to the database')
+                    reset()
+                    document.getElementById('my_modal_5').showModal(false)
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "user created successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+        return res?.data;
+    }
 
 
     return (
@@ -80,7 +90,7 @@ const Details = () => {
                                         required: true
                                     })} placeholder="rating" min={0} max={5} className="input input-bordered" />
                                 </div>
-                                <div className="form-control mt-6">
+                                <div className="form-control mt-6 ">
                                     <input className="btn btn-primary" type="submit" value="Submit Review" />
                                 </div>
                             </form>
