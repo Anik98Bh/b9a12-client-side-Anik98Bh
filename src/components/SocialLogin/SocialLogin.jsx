@@ -17,6 +17,13 @@ const SocialLogin = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(result.user);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "user Login successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 const userInfo = {
                     ...loggedUser
                 }

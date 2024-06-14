@@ -3,9 +3,10 @@ import useAdmin from "../../../hooks/useAdmin";
 import useTutor from "../../../hooks/useTutor";
 
 const Dashboard = () => {
-    const [isAdmin] = useAdmin();
+    // const [isAdmin] = useAdmin();
     // const [isTutor] = useTutor();
-    const isTutor = true;
+    const isAdmin = true;
+    const isTutor = false;
     return (
         <div className="flex">
             <div className="w-64 min-h-screen ">

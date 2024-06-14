@@ -29,23 +29,13 @@ const Login = () => {
         signIn(email, password)
         .then((result) => {
             const user = result.user;
-            console.log(user)
+            // console.log(user)
             Swal.fire({
-                title: "User Login Successfully",
-                showClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
-                }
+                position: "top-end",
+                icon: "success",
+                title: "User Login successfully",
+                showConfirmButton: false,
+                timer: 1500
             });
             navigate(from, { replace: true });
         })
