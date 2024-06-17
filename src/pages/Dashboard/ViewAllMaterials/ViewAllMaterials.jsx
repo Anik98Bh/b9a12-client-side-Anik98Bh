@@ -1,4 +1,4 @@
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaGoogleDrive } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -15,7 +15,7 @@ const ViewAllMaterials = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
 
-    const { data: materials = [],refetch } = useQuery({
+    const { data: materials = [], refetch } = useQuery({
         queryKey: ['material', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/materials/${user?.email}`)
@@ -59,7 +59,7 @@ const ViewAllMaterials = () => {
 
     };
 
-    const handleDeleteNote = id =>{
+    const handleDeleteNote = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -68,7 +68,7 @@ const ViewAllMaterials = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) =>{
+        }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/notes/${id}`)
                     .then(res => {
@@ -117,16 +117,16 @@ const ViewAllMaterials = () => {
                                     {material.title}
                                 </td>
                                 <td> {material.email}</td>
-                                <th>
-                                    <a href={material.url}>{material.url}</a>
-                                </th>
+                                <td>
+                                    <a className="btn btn-circle" href={material.url}><FaGoogleDrive className="text-2xl"></FaGoogleDrive></a>
+                                </td>
                                 <td>
                                     <button onClick={() => document.getElementById('my_modal_5').showModal()}
-                                    className="btn"><FaEdit className="text-2xl"></FaEdit></button>
-                                    </td>
+                                        className="btn"><FaEdit className="text-2xl"></FaEdit></button>
+                                </td>
                                 <td>
-                                    <button onClick={()=>handleDeleteNote(material?._id)}  className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
-                                    </td>
+                                    <button onClick={() => handleDeleteNote(material?._id)} className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
+                                </td>
                             </tr>)
                         }
                     </tbody>

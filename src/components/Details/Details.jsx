@@ -19,7 +19,7 @@ const Details = () => {
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/reviews`)
+            const res = await axiosSecure.get(`/reviews/${_id}`)
             console.log(res.data)
             // .then(res => {
             //     const data = res?.data;
@@ -34,8 +34,9 @@ const Details = () => {
         const reviewData = {
             ...data,
             name: user.displayName,
-            _id
+            id:_id, 
         }
+        console.log(reviewData);
         const res = await axiosCommon.post('/create-review', reviewData)
             .then(res => {
                 if (res.data?.insertedId) {
@@ -59,7 +60,7 @@ const Details = () => {
             <div className=" w-full bg-base-100">
                 <div className="px-3 py-5">
                     <h2 className="text-3xl font-bold">{sessionTitle}</h2>
-                    <div className="flex justify-between my-4">
+                    <div className="md:flex justify-between my-4">
                         <p>Tutor Name: {tutorName}</p>
                         <p>Tutor Email: {tutorEmail}</p>
                     </div>

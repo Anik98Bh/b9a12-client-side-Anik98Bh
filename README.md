@@ -28,16 +28,15 @@ Currently, two official plugins are available:
 
 
 
-  * Admin panel=> {
-    username:
-    password:
-  }
+  * Admin panel=> 
+   - username:
+   - password:
+  
 
 
-
+----------------------------------------
   
   - Five Bullet Point:--
-  ------------------------------
 
   * Design with react jsx and Tailwind css.
   * Create Carousel Banner.
@@ -48,9 +47,9 @@ Currently, two official plugins are available:
   * Create Review system for User.
   * Create a 404 ERROR page, if user type or go wrong url then show custom ERROR.
 
+-----------------------------
 
  - Key Features:--
- --------------------------
 
    1. **User/Student Dashboard**: 
  - User can Pay to access premium sessions using a card.
@@ -58,12 +57,16 @@ Currently, two official plugins are available:
  - Student can create his/her personal note.
  - Student can Manage his/her Personal notes by Update and Deleting system.
  - Student can Download Image and visit google drive link provided by the Tutor.
-   2. **Tutor Dashboard**:
+ 
+  2. **Tutor Dashboard**:
+
  - A Tutor can create new Study sessions. 
  - Tutor can views all Study sessions to created by him/her.
  - He can upload approved session materials.
  - Tutor can views all Materials sessions to uploaded by him/her, also he/she can Update and Delete Materials.
-   3. **Admin Dashboard**:
+
+  3. **Admin Dashboard**:
+
  - An Admin can see all Users, and promote User role.
  - Admin can search an User by user-name or email.
  - Access all sessions created by Tutor and can approve or reject sessions with feedback.

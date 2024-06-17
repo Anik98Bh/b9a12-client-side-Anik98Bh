@@ -44,10 +44,11 @@ const ViewAllUsers = () => {
         })
 
     }
-    const handleMakeTutor = user => {
+
+    const handleMakeTutor = (user) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You wanna make as Tutor!",
+            text: "You wanna make as Admin!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -55,7 +56,7 @@ const ViewAllUsers = () => {
             confirmButtonText: "Yes, make it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/users/tutor/${user?._id}`)
+                axiosSecure.patch(`/users/tutor/${user._id}`)
                     .then(res => {
                         console.log(res.data)
                         if (res.data.modifiedCount > 0) {
@@ -112,7 +113,7 @@ const ViewAllUsers = () => {
                                 </td>
                                 <td>{user?.email}</td>
                                 <th>
-                                    <p className="bg-[#aabceb] rounded-full py-1 pl-3">{user?.role === 'admin' ? 'Admin' : 'student'}</p>
+                                    <p className="bg-[#aabceb] rounded-full py-1 pl-3">{user?.role === 'admin' ? 'Admin' : user?.role === "tutor" ? "Tutor" : 'student'}</p>
                                 </th>
                                 <td className="dropdown dropdown-left">
                                     <div tabIndex={0} role="button" className="btn btn-circle m-1"><MdEdit className="text-2xl" /></div>

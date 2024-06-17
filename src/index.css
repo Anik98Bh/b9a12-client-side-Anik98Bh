@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media screen and (max-width: 520px) {
+    .dashboard-ul {
+        display: none;
+    }
+}

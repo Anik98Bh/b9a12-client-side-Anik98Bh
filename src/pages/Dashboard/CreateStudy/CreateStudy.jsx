@@ -72,7 +72,7 @@ const CreateStudy = () => {
                         <label className="label">
                             <span className="label-text">Session Duration</span>
                         </label>
-                        <input type="text" {...register("sessionDuration", { required: true })} name="sessionDuration" placeholder="session Duration" className="input input-bordered" />
+                        <input type="number" {...register("sessionDuration", { required: true })} name="sessionDuration" placeholder="session Duration" className="input input-bordered" />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">

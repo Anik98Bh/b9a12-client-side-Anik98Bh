@@ -120,7 +120,7 @@ const CheckoutForm = () => {
                         },
                     }}
                 />
-                <button className="btn btn-sm btn-primary my-4" type="submit" 
+                <button className="btn btn-sm btn-primary my-4 w-40 mt-4" type="submit" 
                 // disabled={!stripe || !clientSecret}
                 >
                     Pay

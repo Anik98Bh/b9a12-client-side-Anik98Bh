@@ -18,7 +18,7 @@ const Tutor = () => {
                 <h2 className='text-4xl text-center font-bold mb-5'>Our Tutors</h2>
                 <Swiper
                     slidesPerView={3}
-                    spaceBetween={30}
+                    spaceBetween={50}
                     pagination={{
                         clickable: true,
                     }}
@@ -26,16 +26,15 @@ const Tutor = () => {
                     className="mySwiper"
                 >
                     {
-                        tutor.map(item => <SwiperSlide key={item._id}>
+                        tutor?.map(item => <SwiperSlide key={item._id}>
                             <div>
                                 <div className="card w-96 shadow-xl">
                                     <figure className="px-10 pt-10">
-                                        <img src={item?.image} alt="" className="rounded-full" />
+                                        <img src={item?.photoURL ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7rlHILcxkNp4iwSUhRCeGjQAnZcisSGs9txj5d4FvFr782-NoItG0iDd0GD0eK4WITxU&usqp=CAU"} alt="" className="rounded-full" />
                                     </figure>
                                     <div className="card-body items-center text-center">
-                                        <h2 className="text-2xl font-bold">{item.tutorName}</h2>
-                                        <p>{item?.tutorEmail}</p>
-                                        <p>{item?.subjectsTaught[0]}, {item?.subjectsTaught[1]}, {item?.subjectsTaught[2]}</p>
+                                        <h2 className="text-2xl font-bold">{item.displayName}</h2>
+                                        <p>{item?.email}</p>
                                     </div>
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ const useTutor = () => {
         queryFn: async () => {
             if (user?.email) {
 
-                const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+                const res = await axiosSecure.get(`/users/tutor/${user?.email}`);
                 return res.data?.tutor;
             }
         }

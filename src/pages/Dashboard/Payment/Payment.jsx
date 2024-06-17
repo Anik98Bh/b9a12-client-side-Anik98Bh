@@ -8,7 +8,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK)
 const Payment = () => {
     return (
         <div>
-            <h1 className="text-4xl font-bold text-center">Payment here</h1>
+            <h1 className="text-4xl font-bold text-center my-8">Payment Here</h1>
             <div>
                 <Elements stripe={stripePromise}>
                     <CheckoutForm></CheckoutForm>

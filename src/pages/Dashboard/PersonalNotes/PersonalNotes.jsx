@@ -5,14 +5,16 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const PersonalNotes = () => {
-    const {user}=useAuth();
+    const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const axiosSecure = useAxiosSecure();
+    const [currentNote, setCurrentNote] = useState(null);
 
     const { data: notes = [], refetch } = useQuery({
-        queryKey: ['note',user?.email],
+        queryKey: ['note', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/notes/${user?.email}`)
             console.log(res.data)
@@ -20,12 +22,7 @@ const PersonalNotes = () => {
         }
     })
 
-    const onSubmit = async (data) => {
-        console.log(data)
-
-    };
-
-    const handleDeleteNote = id => {
+    const handleDeleteNote = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -36,21 +33,48 @@ const PersonalNotes = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/notes/${user?._id}`)
+                axiosSecure.delete(`/notes/${id}`)
                     .then(res => {
                         console.log(res.data)
-                        // if (res.data.deletedCount > 0) {
-                        //     refetch();
-                        //     Swal.fire({
-                        //         title: "Deleted!",
-                        //         text: "Your file has been deleted.",
-                        //         icon: "success"
-                        //     });
-                        // }
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
                     })
             }
         });
     }
+
+
+
+    const handleOpenModal = (note) => {
+        setCurrentNote(note);
+        document.getElementById('my_modal_5').showModal();
+    };
+
+    const onSubmit = async (data) => {
+        console.log(data)
+        const res = await axiosSecure.patch(`/update-note/${currentNote._id}`, data);
+        if (res.data.modifiedCount > 0) {
+            refetch();
+            reset();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Note is updated.`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setCurrentNote(null);
+        }
+    };
+
+    console.log(currentNote)
+
 
     return (
         <div>
@@ -69,17 +93,19 @@ const PersonalNotes = () => {
                     </thead>
                     <tbody>
                         {
-                            notes?.map((note,idx)=> <tr key={note._id}>
-                                <th>{idx+1}</th>
+                            notes?.map((note, idx) => <tr key={note._id}>
+                                <th>{idx + 1}</th>
                                 <td>{note.title}</td>
                                 <td>{note.description}</td>
                                 <td>{note.email}</td>
                                 <td>
-                                    <button className="btn" onClick={() => document.getElementById('my_modal_5').showModal()}><FaEdit className="text-2xl"></FaEdit></button>
+                                    <button className="btn" onClick={() => handleOpenModal(note)}>
+                                        <FaEdit className="text-2xl"></FaEdit>
+                                    </button>
                                 </td>
                                 <td>
-                                    <button onClick={()=>handleDeleteNote(user?._id)} className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
-                                    </td>
+                                    <button onClick={() => handleDeleteNote(note?._id)} className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
+                                </td>
                             </tr>)
                         }
                     </tbody>
@@ -100,13 +126,13 @@ const PersonalNotes = () => {
                                     <label className="label">
                                         <span className="label-text">Title</span>
                                     </label>
-                                    <input type="text" {...register("title", { required: true })} placeholder="title" className="input input-bordered" />
+                                    <input type="text" {...register("title", { required: true })} placeholder="title" defaultValue={currentNote?.title} className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Description</span>
                                     </label>
-                                    <textarea {...register("description", { required: true })} placeholder="description" className="textarea textarea-bordered" />
+                                    <textarea {...register("description", { required: true })} placeholder="description" defaultValue={currentNote?.description} className="textarea textarea-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <input className="btn btn-primary" type="submit" value="Update Note" />

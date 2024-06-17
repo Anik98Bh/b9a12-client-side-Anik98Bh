@@ -49,11 +49,11 @@ const Navbar = () => {
                     <div className="flex">
                         <img src={logo} className="w-16 h-10" alt="" />
                         <Link to="/">
-                        <p className="btn btn-ghost text-xl">StudyBuddyHub</p>
+                        <p className="btn btn-ghost md:text-xl">StudyBuddyHub</p>
                         </Link>
                     </div>
                     {/* theme change */}
-                    <div className="ml-5">
+                    <div className="ml-11 mr-10">
                         <label className="swap swap-rotate">
                             {/* this hidden checkbox controls the state */}
                             <input onChange={handleToggle} type="checkbox" />
@@ -67,7 +67,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 font-bold">
                         {navOptions}
                     </ul>
                 </div>
