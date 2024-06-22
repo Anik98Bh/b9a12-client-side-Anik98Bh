@@ -126,13 +126,13 @@ const PersonalNotes = () => {
                                     <label className="label">
                                         <span className="label-text">Title</span>
                                     </label>
-                                    <input type="text" {...register("title", { required: true })} placeholder="title" defaultValue={currentNote?.title} className="input input-bordered" />
+                                    <input type="text" {...register("title")} placeholder="title" defaultValue={currentNote?.title} className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Description</span>
                                     </label>
-                                    <textarea {...register("description", { required: true })} placeholder="description" defaultValue={currentNote?.description} className="textarea textarea-bordered" />
+                                    <textarea {...register("description")} placeholder="description" defaultValue={currentNote?.description} className="textarea textarea-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <input className="btn btn-primary" type="submit" value="Update Note" />

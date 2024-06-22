@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const CheckoutForm = () => {
     const { user } = useAuth();
@@ -13,18 +14,27 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    // const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+    // const totalFee = booked?.reduce((total, item) => total + item.fee, 0);
     const navigate = useNavigate();
 
+    // const { data: booked = [], refetch } = useQuery({
+    //     queryKey: ['book', user?.email],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/booked/${user?.email}`)
+    //         console.log(res.data)
+    //         return res.data;
+    //     }
+    // })
+
     // useEffect(() => {
-    //     if (totalPrice > 0) {
-    //         axiosSecure.post('/create-payment-intent', { price: totalPrice })
+    //     if (totalFee > 0) {
+    //         axiosSecure.post('/create-payment-intent', { price: totalFee })
     //             .then(res => {
     //                 console.log(res.data.clientSecret);
     //                 setClientSecret(res.data.clientSecret)
     //             })
     //     }
-    // }, [axiosSecure, totalPrice])
+    // }, [axiosSecure, totalFee])
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -1,60 +1,62 @@
-import { useState } from "react";
-import "./SeeAllSessions.css"
+import React, { useState } from 'react';
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import { useQuery } from "@tanstack/react-query";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import Study from "../Study/Study";
 
 const SeeAllSessions = () => {
-    const [itemsPerPage, setItemsPerPage] = useState(6);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [count, setCount] = useState(20);
+    const axiosCommon = useAxiosCommon();
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const numberOfPages = Math.ceil(count / itemsPerPage);
+    const fetchSessions = async (key, page = 1) => {
+        const { data } = await axiosCommon.get(`/all-approved-session?page=${page}`);
+        return data;
+    };
 
-    const pages = [...Array(numberOfPages).keys()];
+    const { data, isLoading, isError, refetch } = useQuery({
+        queryKey: ['sessions', currentPage],
+        queryFn: ({ queryKey }) => fetchSessions(queryKey, currentPage)
+    });
 
-    // const handleItemsPerPage = e => {
-    //     const val = parseInt(e.target.value);
-    //     console.log(val);
-    //     setItemsPerPage(val);
-    //     setCurrentPage(0);
-    // }
-
-    const handlePrevPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage(currentPage - 1)
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prevPage => prevPage - 1);
         }
-    }
+    };
 
     const handleNextPage = () => {
-        if (currentPage < pages.length - 1) {
-            setCurrentPage(currentPage + 1)
+        if (currentPage < data.totalPages) {
+            setCurrentPage(prevPage => prevPage + 1);
         }
-    }
+    };
+
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>Error fetching data</p>;
 
     return (
         <div>
-            <h1>See All Sessions</h1>
-            <div className='pagination'>
-                <p>Current Page: {currentPage}</p>
-                <button 
-                onClick={handlePrevPage}
-                >Prev</button>
-                {
-                    pages.map(page => <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={currentPage === page ? 'selected' : ' ' }
-                        >{page}</button>)
-                }
-                <button 
-                onClick={handleNextPage}
-                >Next</button>
-                {/* <select value={itemsPerPage} 
-                onChange={handleItemsPerPage} 
-                name="" id="">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select> */}
+            <h1 className="text-3xl font-bold text-center my-5">See All Sessions</h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                {data.items.map(item => (
+                    <Study key={item._id} item={item} />
+                ))}
+            </div>
+            <div className='pagination mt-20 text-center'>
+                <button
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                    className="btn"
+                >
+                    <GrPrevious /> Prev
+                </button>
+                <span className=''>Page {currentPage} of {data.totalPages}</span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === data.totalPages}
+                    className="btn"
+                >
+                    Next <GrNext />
+                </button>
             </div>
         </div>
     );

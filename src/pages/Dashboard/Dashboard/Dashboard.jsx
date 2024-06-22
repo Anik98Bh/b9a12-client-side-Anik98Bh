@@ -24,7 +24,7 @@ const Dashboard = () => {
                     <li><NavLink to="/dashboard/viewBooked">View booked</NavLink></li>
                     <li><NavLink to="/dashboard/createNote">Create Note</NavLink></li>
                     <li><NavLink to="/dashboard/personalNotes">Manage Personal Notes</NavLink></li>
-                    <li><NavLink to="/dashboard/viewAll">View All</NavLink></li>
+                    <li><NavLink to="/dashboard/viewAll">View All Materials</NavLink></li>
                 </>
         }
         <div className="divider"></div>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <h2 className="text-xl font-bold text-center mt-2">{isAdmin ? "Admin" : isTutor  ? "Tutor" : "Student"} Routes</h2>
+                <h2 className="text-xl font-bold text-center mt-2">{isAdmin ? "Admin" : isTutor ? "Tutor" : "Student"} Routes</h2>
                 <ul className="menu dashboard-ul font-bold">
                     {navOptions}
                 </ul>

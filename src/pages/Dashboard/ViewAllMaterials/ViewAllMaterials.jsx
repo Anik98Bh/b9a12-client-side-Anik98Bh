@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import { useForm } from "react-hook-form";
+import { useState, useRef } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
@@ -14,15 +15,17 @@ const ViewAllMaterials = () => {
     const axiosCommon = useAxiosCommon();
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
+    const [id, setId] = useState();
+    const modalRef = useRef();
 
     const { data: materials = [], refetch } = useQuery({
         queryKey: ['material', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/materials/${user?.email}`)
-            console.log(res.data)
+            const res = await axiosSecure.get(`/materials/${user?.email}`);
+            console.log(res.data);
             return res.data;
         }
-    })
+    });
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -36,30 +39,39 @@ const ViewAllMaterials = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        console.log(res.data)
-        // if (res?.data.success) {
-        //     const materialsData = {
-        //         ...data,
-        //         image: res?.data?.data?.display_url
-        //     }
-        //     const materialsRes = await axiosSecure.post('/create-materials', materialsData);
-        //     console.log(materialsRes.data);
-        //     if (materialsRes?.data?.insertedId) {
-        //         // show success popup
-        //         reset();
-        //         Swal.fire({
-        //             position: "top-end",
-        //             icon: "success",
-        //             title: 'Materials added Successfully',
-        //             showConfirmButton: false,
-        //             timer: 1500
-        //         });
-        //     }
-        // }
+        console.log(res.data);
+        if (res?.data.success) {
+            const materialsData = {
+                ...data,
+                image: res?.data?.data?.display_url
+            };
+            const materialsRes = await axiosSecure.patch(`/update-materials/${id._id}`, materialsData);
+            console.log(materialsRes.data);
+            if (materialsRes?.data?.modifiedCount) {
+                // Show success popup
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: 'Materials Updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
+                // Close the modal
+                modalRef.current.close();
+                refetch();
+            }
+        }
     };
 
-    const handleDeleteNote = id => {
+    const handleMaterialUpdate = id => {
+        document.getElementById('my_modal_5').showModal();
+        const updateMaterial = materials?.find(material => material._id === id);
+        setId(updateMaterial);
+    };
+
+    const handleDeleteMaterials = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -70,9 +82,9 @@ const ViewAllMaterials = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/notes/${id}`)
+                axiosSecure.delete(`/delete-materials/${id}`)
                     .then(res => {
-                        console.log(res.data)
+                        console.log(res.data);
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({
@@ -81,10 +93,10 @@ const ViewAllMaterials = () => {
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
-        })
-    }
+        });
+    };
 
     return (
         <div>
@@ -121,57 +133,43 @@ const ViewAllMaterials = () => {
                                     <a className="btn btn-circle" href={material.url}><FaGoogleDrive className="text-2xl"></FaGoogleDrive></a>
                                 </td>
                                 <td>
-                                    <button onClick={() => document.getElementById('my_modal_5').showModal()}
+                                    <button onClick={() => handleMaterialUpdate(material._id)}
                                         className="btn"><FaEdit className="text-2xl"></FaEdit></button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleDeleteNote(material?._id)} className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
+                                    <button onClick={() => handleDeleteMaterials(material?._id)} className="btn"><RiDeleteBin6Fill className="text-2xl"></RiDeleteBin6Fill></button>
                                 </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
-            {/* modal */}
+            {/* modal update */}
             <div>
-                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle" ref={modalRef}>
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">Update Now</h3>
                         <div>
                             <form onSubmit={handleSubmit(onSubmit)}
                                 className="card-body">
-                                <div className="form-control w-full">
-                                    <label className="label">
-                                        <span className="label-text">Title</span>
-                                    </label>
-                                    <input type="text" {...register("title", { required: true })} name="title" placeholder="Title" className="input input-bordered" />
-                                </div>
                                 <div className="">
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text">Image</span>
                                         </label>
-                                        <input type="file" {...register("image", { required: true })} name="image" placeholder="image" className="file-input input-bordered" />
+                                        <input type="file" {...register("image")} name="image" placeholder="image" className="file-input input-bordered" defaultValue={id?.image} />
                                     </div>
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text">Google Drive Link</span>
                                         </label>
-                                        <input type="text" {...register("url", { required: true })} name="url" placeholder="url" className="input input-bordered" />
+                                        <input type="text" {...register("url")} name="url" placeholder="url" className="input input-bordered" defaultValue={id?.url} />
                                     </div>
-                                </div>
-                                <div className="form-control w-full">
-                                    <label className="label">
-                                        <span className="label-text">Email</span>
-                                    </label>
-                                    <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" defaultValue={user?.email} readOnly />
                                 </div>
                                 <div className="form-control mt-6">
                                     <div className="modal-action">
-                                        <form method="dialog">
-                                            {/* if there is a button in form, it will close the modal */}
-                                            <input className="btn btn-primary" type="submit" value="Update Materials" />
-                                        </form>
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <input className="btn btn-primary" type="submit" value="Update Materials" />
                                     </div>
                                 </div>
                             </form>

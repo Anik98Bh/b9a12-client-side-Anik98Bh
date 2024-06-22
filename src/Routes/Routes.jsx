@@ -34,9 +34,9 @@ export const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/study/:id",
+                path: "/all-session/:id",
                 element: <PrivateRoute><Details /></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:5000/study/${params?.id}`)
+                loader: ({params})=>fetch(`http://localhost:5000/all-study-session/${params?.id}`)
             },
             {
                 path: "/seeAllSessions",

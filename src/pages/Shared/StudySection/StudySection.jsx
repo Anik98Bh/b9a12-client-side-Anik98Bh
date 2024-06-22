@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import Study from "../../../components/Study/Study";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
 
 const StudySection = () => {
-    const [study, setStudy] = useState([]);
+    const axiosCommon = useAxiosCommon();
 
-    useEffect(() => {
-        fetch('http://localhost:5000/study')
-            .then(res => res.json())
-            .then(data => setStudy(data))
-    }, [])
-
+    const { data: allSession = [], refetch } = useQuery({
+        queryKey: ['all-session'],
+        queryFn: async () => {
+            const res = await axiosCommon.get(`/all-approved-session`)
+            return res.data;
+        }
+    })
+console.log('all session study',allSession);
     return (
         <div>
             <h2 className="text-4xl font-bold text-center mt-20 mb-8">Study Session Section</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {
-                    study.slice(0, 6)?.map(item => <Study
+                    allSession?.items?.map(item => <Study
                         key={item._id}
                         item={item}></Study>)
                 }

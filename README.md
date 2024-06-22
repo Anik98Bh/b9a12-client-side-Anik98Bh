@@ -29,8 +29,8 @@ Currently, two official plugins are available:
 
 
   * Admin panel=> 
-   - username:
-   - password:
+   - username: anik@gmail.com
+   - password: @Aa123
   
 
 
@@ -70,4 +70,4 @@ Currently, two official plugins are available:
  - An Admin can see all Users, and promote User role.
  - Admin can search an User by user-name or email.
  - Access all sessions created by Tutor and can approve or reject sessions with feedback.
- - Admin can view all materials and remove inappropriate and outdated content.
+ - Admin can view all materials and remove inappropriate and outdated content to created by Tutor.

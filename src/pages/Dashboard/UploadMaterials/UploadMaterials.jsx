@@ -14,6 +14,7 @@ const UploadMaterials = () => {
     const axiosCommon = useAxiosCommon();
     const axiosSecure = useAxiosSecure();
     const [id, setId] = useState(null);
+    const [title, setTitle] = useState(null);
 
     const scrollContainerRef = useRef(null);
 
@@ -63,9 +64,10 @@ const UploadMaterials = () => {
 
     };
 
-    const handleAdd = (id) => {
+    const handleAdd = (id, title) => {
         console.log(id)
         setId(id)
+        setTitle(title)
         if (scrollContainerRef.current) {
             scrollContainerRef.current.scrollIntoView({
                 behavior: 'smooth',
@@ -100,7 +102,7 @@ const UploadMaterials = () => {
                                 <td>
                                     <p className="bg-[#b7caef] text-center rounded-full py-1 font-bold">{item.status}</p>
                                 </td>
-                                <td><button onClick={() => handleAdd(item._id)} className="btn btn-sm btn-accent">Upload Materials</button></td>
+                                <td><button onClick={() => handleAdd(item._id, item.title)} className="btn btn-sm btn-accent">Upload Materials</button></td>
                             </tr>
                             )
                         }
@@ -114,7 +116,7 @@ const UploadMaterials = () => {
                     <label className="label">
                         <span className="label-text">Session Title</span>
                     </label>
-                    <input type="text" {...register("title", { required: true })} name="title" placeholder="Session Title" className="input input-bordered" />
+                    <input type="text" {...register("title",)} name="title" placeholder="Session Title" className="input input-bordered" defaultValue={title} />
                 </div>
                 <div className="flex gap-5">
                     <div className="form-control w-full">

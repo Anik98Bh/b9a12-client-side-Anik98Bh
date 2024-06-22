@@ -8,25 +8,37 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import Swal from "sweetalert2";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth();
-    const { register, handleSubmit,reset, formState: { errors }, } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const axiosCommon = useAxiosCommon();
     const navigate = useNavigate();
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const image = data.image[0];
+        const binaryImg = new FormData();
+        binaryImg.append("image", image);
+        const res = await axiosCommon.post(
+            `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
+            binaryImg, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
         createUser(data?.email, data?.password)
             .then((result) => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                updateUserProfile(data?.name, data?.photoUrl)
+                updateUserProfile(data?.name, res?.data?.data?.display_url)
                     .then(() => {
                         const userInfo = {
                             ...loggedUser,
-                            role: data?.role
+                            role: data?.role,
+                            photoUrl: res?.data?.data?.display_url
+                        
                         }
                         // create user entry in the database
                         axiosCommon.post('/users', userInfo)
@@ -74,13 +86,13 @@ const Register = () => {
                                 <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" />
                                 {errors.name && <span className="text-red-600">Name is required</span>}
                             </div>
-                            {/* <div className="form-control">
+                            <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Photo URL</span>
+                                    <span className="label-text">Image</span>
                                 </label>
-                                <input type="file" {...register("photoUrl", { required: true })} placeholder="Photo URL" className="input input-bordered" />
+                                <input type="file" {...register("image", { required: true })} name="image" placeholder="image" className="file-input input-bordered" />
                                 {errors.photoUrl && <span className="text-red-600">Photo URL is required</span>}
-                            </div> */}
+                            </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Role</span>

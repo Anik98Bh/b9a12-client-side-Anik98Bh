@@ -75,7 +75,7 @@ const Navbar = () => {
                     {/* profile */}
                     {
                         user?.email ? <>
-                            <p><Link to="/dashboard">Dashboard</Link></p>
+                            <p className="font-bold"><Link to="/dashboard">Dashboard</Link></p>
                             <div className="dropdown dropdown-end dropdown-hover">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-16 rounded-full">
