@@ -15,7 +15,7 @@ const Details = () => {
     const modalRef = useRef();
     const study = useLoaderData();
     const { title, tutorName, tutorEmail, description, registration_start_date, registration_end_date, class_start_date, class_end_date, duration, fee, status, _id } = study;
-    console.log('details study', study);
+    
     const axiosCommon = useAxiosCommon();
     const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm();
@@ -46,7 +46,7 @@ const Details = () => {
         queryKey: ['review'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/reviews/${_id}`)
-            console.log(res.data)
+           
             return res.data;
         }
     })
@@ -57,7 +57,6 @@ const Details = () => {
             name: user.displayName,
             id: _id,
         }
-        console.log(reviewData);
         const res = await axiosCommon.post('/create-review', reviewData)
             .then(res => {
                 if (res.data?.insertedId) {
@@ -76,9 +75,7 @@ const Details = () => {
             })
         return res?.data;
     }
-    console.log(user)
     const handleBooked = async (fee) => {
-        console.log(typeof fee)
         const { _id, ...restStudy } = study;
 
         const bookData = {
@@ -96,7 +93,6 @@ const Details = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(response.data);
                 if (response?.data?.insertedId) {
                     // show success popup
                     Swal.fire({

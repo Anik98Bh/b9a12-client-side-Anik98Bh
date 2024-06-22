@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             {
                 path: "/all-session/:id",
                 element: <PrivateRoute><Details /></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:5000/all-study-session/${params?.id}`)
+                loader: ({params})=>fetch(`https://b9a12-server-side-anik98-bh.vercel.app/all-study-session/${params?.id}`)
             },
             {
                 path: "/seeAllSessions",

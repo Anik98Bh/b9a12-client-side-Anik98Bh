@@ -9,12 +9,10 @@ const CreateNote = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data)
         const noteItem={
             ...data
         }
         const res = await axiosSecure.post('/create-note', noteItem);
-        console.log(res.data)
         if (res.data.insertedId) {
             // show success popup
             reset();

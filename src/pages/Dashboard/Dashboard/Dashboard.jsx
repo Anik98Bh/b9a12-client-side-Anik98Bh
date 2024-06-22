@@ -6,8 +6,6 @@ const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const [isTutor] = useTutor();
 
-    console.log(isAdmin, isTutor);
-
     const navOptions = <>
         {
             isAdmin ? <>

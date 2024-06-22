@@ -18,14 +18,12 @@ const UpdateData = ({updateSession}) => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         // try {
         //     const response = await axiosCommon.patch(`/update-session/${updateId}`, data, {
         //         headers: {
         //             'Content-Type': 'application/json'
         //         }
         //     });
-        //     console.log(response.data);
         //     refetch()
         //     reset();
         // } catch (error) {

@@ -22,13 +22,11 @@ const ViewAllMaterials = () => {
         queryKey: ['material', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/materials/${user?.email}`);
-            console.log(res.data);
             return res.data;
         }
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         const image = data.image[0];
         const binaryImg = new FormData();
         binaryImg.append("image", image);
@@ -39,14 +37,12 @@ const ViewAllMaterials = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        console.log(res.data);
         if (res?.data.success) {
             const materialsData = {
                 ...data,
                 image: res?.data?.data?.display_url
             };
             const materialsRes = await axiosSecure.patch(`/update-materials/${id._id}`, materialsData);
-            console.log(materialsRes.data);
             if (materialsRes?.data?.modifiedCount) {
                 // Show success popup
                 reset();
@@ -84,7 +80,6 @@ const ViewAllMaterials = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/delete-materials/${id}`)
                     .then(res => {
-                        console.log(res.data);
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({

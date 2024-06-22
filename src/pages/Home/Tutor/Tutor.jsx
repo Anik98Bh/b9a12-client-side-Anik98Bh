@@ -8,7 +8,7 @@ const Tutor = () => {
     const [tutor, setTutor] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/tutor')
+        fetch('https://b9a12-server-side-anik98-bh.vercel.app/tutor')
             .then(res => res.json())
             .then(data => setTutor(data))
     }, [])

@@ -12,7 +12,6 @@ const AllMaterials = () => {
         queryKey: ['material',],
         queryFn: async () => {
             const res = await axiosSecure.get(`/materials`)
-            console.log(res.data)
             return res.data;
         }
     })
@@ -30,7 +29,6 @@ const AllMaterials = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/delete-materials/${id}`)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({

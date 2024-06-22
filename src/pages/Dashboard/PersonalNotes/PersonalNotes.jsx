@@ -17,7 +17,6 @@ const PersonalNotes = () => {
         queryKey: ['note', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/notes/${user?.email}`)
-            console.log(res.data)
             return res.data;
         }
     })
@@ -35,7 +34,6 @@ const PersonalNotes = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/notes/${id}`)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({
@@ -57,7 +55,6 @@ const PersonalNotes = () => {
     };
 
     const onSubmit = async (data) => {
-        console.log(data)
         const res = await axiosSecure.patch(`/update-note/${currentNote._id}`, data);
         if (res.data.modifiedCount > 0) {
             refetch();
@@ -72,8 +69,6 @@ const PersonalNotes = () => {
             setCurrentNote(null);
         }
     };
-
-    console.log(currentNote)
 
 
     return (

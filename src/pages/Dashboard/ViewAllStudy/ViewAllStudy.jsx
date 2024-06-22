@@ -14,7 +14,6 @@ const ViewAllStudy = () => {
             return res.data;
         }
     })
-    console.log(allSession)
 
     // const { data: feedbacks = [] } = useQuery({
     //     queryKey: ['feedback',],

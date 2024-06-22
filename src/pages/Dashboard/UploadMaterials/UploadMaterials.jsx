@@ -23,14 +23,11 @@ const UploadMaterials = () => {
         queryKey: ['approved-session', user?.email],
         queryFn: async () => {
             const res = await axiosCommon.get(`/all-approved-session/${user?.email}`)
-            console.log(res.data)
             return res.data;
         }
     })
-    console.log(approvedSession);
 
     const onSubmit = async (data) => {
-        console.log(data);
         const image = data.image[0];
         const binaryImg = new FormData();
         binaryImg.append("image", image);
@@ -41,14 +38,12 @@ const UploadMaterials = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        console.log(res.data)
         if (res?.data.success) {
             const materialsData = {
                 ...data,
                 image: res?.data?.data?.display_url
             }
             const materialsRes = await axiosSecure.post('/create-materials', materialsData);
-            console.log(materialsRes.data);
             if (materialsRes?.data?.insertedId) {
                 // show success popup
                 reset();
@@ -65,7 +60,6 @@ const UploadMaterials = () => {
     };
 
     const handleAdd = (id, title) => {
-        console.log(id)
         setId(id)
         setTitle(title)
         if (scrollContainerRef.current) {

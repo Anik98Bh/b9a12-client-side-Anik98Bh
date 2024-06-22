@@ -15,7 +15,6 @@ const StudySection = () => {
             return res.data;
         }
     })
-console.log('all session study',allSession);
     return (
         <div>
             <h2 className="text-4xl font-bold text-center mt-20 mb-8">Study Session Section</h2>

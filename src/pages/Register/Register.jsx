@@ -31,7 +31,6 @@ const Register = () => {
         createUser(data?.email, data?.password)
             .then((result) => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
                 updateUserProfile(data?.name, res?.data?.data?.display_url)
                     .then(() => {
                         const userInfo = {
@@ -44,7 +43,6 @@ const Register = () => {
                         axiosCommon.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('user added to the database')
                                     reset()
                                     Swal.fire({
                                         position: "top-end",

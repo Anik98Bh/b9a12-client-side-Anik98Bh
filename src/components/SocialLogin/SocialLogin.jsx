@@ -16,7 +16,6 @@ const SocialLogin = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(result.user);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -31,7 +30,6 @@ const SocialLogin = () => {
                 navigate(from, { replace: true });
                 axiosCommon.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data)
                         navigate('/')
                     })
             })
@@ -40,7 +38,6 @@ const SocialLogin = () => {
     const handleGithubLogin = () => {
         githubLogin()
             .then(result => {
-                console.log(result.user)
                 navigate(location?.state ? location.state : "/")
                 if (result.user) {
                     Swal.fire({

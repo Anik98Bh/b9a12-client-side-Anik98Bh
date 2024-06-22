@@ -7,7 +7,6 @@ const RejectionModal = ({id}) => {
     const axiosCommon=useAxiosCommon()
 
     const onSubmit = async (data) => {
-        console.log(data);
         const feedbackData={
             ...data,
             session_id: id
@@ -18,7 +17,6 @@ const RejectionModal = ({id}) => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
             if (response?.data?.insertedId) {
                 // show success popup
                 reset();

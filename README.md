@@ -21,8 +21,8 @@ Currently, two official plugins are available:
 
 ## Summery of this project
 
-<p align="center">Live Link : https://b9a11-client-side-a.app/ <p/>
-  <h3 align="center">Website: <a href="https://b9a11-client-side-ah.web.app">StudyBuddyHub</a></h3>
+<p align="center">Live Link : https://b9a12-client-side-anik98bh.web.app <p/>
+  <h3 align="center">Website: <a href="https://b9a12-client-side-anik98bh.web.app">StudyBuddyHub</a></h3>
 
 
 

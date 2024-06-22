@@ -28,10 +28,8 @@ const ViewAllStudySession = () => {
             return res.data;
         }
     })
-    console.log(allSession)
 
     const onSubmit = async (data) => {
-        console.log(data);
         const approveData = {
             ...data,
             status: 'approved'
@@ -99,7 +97,6 @@ const ViewAllStudySession = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
             refetch()
             reset();
         } catch (error) {

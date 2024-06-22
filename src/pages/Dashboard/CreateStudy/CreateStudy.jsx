@@ -9,14 +9,12 @@ const CreateStudy = () => {
     const axiosCommon=useAxiosCommon();
 
     const onSubmit = async(data) => {
-        console.log(data);
         try {
             const response = await axiosCommon.post('/create-session', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
             if (response.data?.insertedId) {
                 // show success popup
                 reset();
