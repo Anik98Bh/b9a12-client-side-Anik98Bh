@@ -84,4 +84,4 @@ Currently, two official plugins are available:
 
 ### For Local Run:
 * npm i
-and Clone <a href="https://github.com/Anik98Bh/b9a12-server-side-Anik98Bh" target="blank">Server Side</a>
+* and Clone <a href="https://github.com/Anik98Bh/b9a12-server-side-Anik98Bh" target="blank">Server Side</a>
