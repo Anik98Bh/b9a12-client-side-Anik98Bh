@@ -79,3 +79,9 @@ Currently, two official plugins are available:
  - Admin can search an User by user-name or email.
  - Access all sessions created by Tutor and can approve or reject sessions with feedback.
  - Admin can view all materials and remove inappropriate and outdated content to created by Tutor.
+
+<hr />
+
+### For Local Run:
+* npm i
+and Clone <a href="https://github.com/Anik98Bh/b9a12-server-side-Anik98Bh" target="blank">Server Side</a>
