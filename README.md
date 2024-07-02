@@ -49,7 +49,15 @@ Currently, two official plugins are available:
 
 -----------------------------
 
- - Key Features:--
+### Technology used:
+* ##### Frontend:
+ 1. React, 2. TailwindCSS, 3. DaisyUi 4. JavaScript, 5. Firebase, 6.HTML.
+* ##### Backend:
+ 1. Node.js, 2.Express.js.
+* ##### Database:
+ 1. MongoDB
+
+ ## Key Features:--
 
    1. **User/Student Dashboard**: 
  - User can Pay to access premium sessions using a card.
